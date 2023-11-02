@@ -1,0 +1,57 @@
+.section {
+    width: 90vw;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+main {
+
+    border: 1px solid grey;
+    border-radius: 6px;
+
+    padding: 10px;
+}
+
+.header {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 40px;
+    padding: 5px 20px;
+  
+
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px gray;
+
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    
+
+    padding: 0 5px;
+
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.link {
+    color: blue;
+    text-decoration: none;
+}
+
+.auth {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+
+    gap: 10px;
+}

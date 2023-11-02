@@ -1,0 +1,72 @@
+.lable {
+   
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.text {
+    margin: 0;
+}
+
+
+
+input:required:invalid {
+    border: lightcoral solid 3px;
+  }
+
+input:required:valid {
+    border: lightblue solid 3px;
+}
+
+.button {
+    width: 50%;
+    height: 30px;
+
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+
+    background-color: white;
+    box-shadow: 0px 0px 22px 0 rgb(212, 212, 212), 0px 0px 12px 0.5px rgb(104, 104, 104), 0px 0px 5px 0 rgb(65, 65, 65);
+    transition: background-color 500ms;
+}
+
+.button:hover {
+    background-color: rgba(166, 96, 175, 0.404);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 10px;
+    width: 50%;
+
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 10px;
+    
+}
+
+.lab {
+    width: 250px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    gap: 5px;
+
+    margin: 0 auto 0 0;
+}

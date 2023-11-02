@@ -1,0 +1,29 @@
+form {
+ 
+    width: 40%;
+    margin-left: auto;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 10px;
+    
+}
+
+.lab {
+    width: 250px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    gap: 5px;
+
+    margin: 0 auto 0 0;
+}
+
+
