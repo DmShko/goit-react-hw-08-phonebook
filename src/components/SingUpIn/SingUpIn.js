@@ -19,7 +19,7 @@ export const DataIn = () => {
     
     // transfer data only, if valid fields is valid
     if (NameValid === false && emailValid === false && passwordValid === false) {
-    evt.preventDefault(getAPI);
+      evt.preventDefault();
     }
       
 

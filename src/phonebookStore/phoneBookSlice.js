@@ -4,10 +4,10 @@ import Notiflix from 'notiflix';
 // import { nanoid } from 'nanoid';
 
 import { getUserAPI } from '../API/getUserAPI';
-// import { addAPI } from '../API/AddContact';
-// import { deleteAPI } from '../API/DeleteContact';
+import { addContact } from '../API/addContactAPI';
+import { deleteContact } from '../API/delContactAPI';
 
-const phonebookInitialState = {items: [], filter: '', isLoading: false, error: null,};
+const phonebookInitialState = {items: [], filter: '', isLoading: false, error: null, changeMode: false};
 
 const phonebookSlice = createSlice(
     {
@@ -19,14 +19,14 @@ const phonebookSlice = createSlice(
                 //find repeat contact
                 if (
                     state.items.find(
-                    element => element.name === [action.payload.name, action.payload.phone].join(' ')
+                    element => element.name === [action.payload.name, action.payload.number].join(' ')
                     ) !== undefined
                 ) {
                     Notiflix.Notify.warning(`"${action.payload.name}" is already in contacts!`, {position: 'center-top', fontSize: '24px',});
                     return state;
                 } 
                 //add new contact with save current value state
-                state.items.push({name: [action.payload.name, action.payload.phone].join(' '), id: action.payload.value.payload.id,});
+                state.items.push({name: [action.payload.name, action.payload.number].join(' '), id: action.payload.value.payload.id, active: state.changeMode});
                
             },
             // delete contact
@@ -38,50 +38,84 @@ const phonebookSlice = createSlice(
             changeFilter(state, action) {
                 state.filter = action.payload;
             },
+
+            // delete/change contacts render filter 
+            changeButtonActive(state, action) {
+                
+                state.changeMode = !state.changeMode;
+
+                if(state.items.length !== 0) {
+                  
+                     state.items.map(
+                     element => {return element.id === action.payload} 
+                    ).active = !state.changeMode;
+                }
+            },
         },
-        extraReducers:{
-            [getUserAPI.pending]: (state) => {state.isLoading = true; state.error = null;},
-            [getUserAPI.fulfilled]: (state, action) => {
+        extraReducers:
+
+            builder => {
+                builder.addCase(getUserAPI.pending, (state) => {
+                    state.isLoading = true; 
+                    state.error = null;
+                });
                 
-                state.isLoading = false;
+                builder.addCase(getUserAPI.fulfilled, (state, action) => {
+                    state.isLoading = false;
                 
-                if(state.items.length
+                    if(state.items.length
                      !== action.payload.length
                     ) {
                     action.payload.map(value => 
 
-                    { return state.items.push({name: [value.name, value.phone].join(' '), id: value.id,})});
+                    { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, active: state.changeMode})});
                 }
                 // some actions with 'action'...
-            },
-            [getUserAPI.rejected]: (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload;
-            },
+                    // some actions with 'action'...
+                });
+                
+                builder.addCase(getUserAPI.rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.error = action.payload;
+                });
+                builder.addCase(addContact.pending, (state) => {
+                    state.isLoading = true; 
+                    state.error = null;
+                });
+                
+                builder.addCase(addContact.fulfilled, (state, action) => {
+                    state.isLoading = false;
+                    
+                
+                    // state.token = action.payload.token;
+                    // some actions with 'action'...
+                });
+                
+                builder.addCase(addContact.rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.error = action.payload;
+                });
 
-            // [addAPI.pending]: (state) => {state.isLoading = true; state.error = null;},
-            // [addAPI.fulfilled]: (state) => {
-            //     state.status = 'resolved';
-            //     state.isLoading = false;
-            //     // some actions with 'action'...
-            // },
-            // [addAPI.rejected]: (state, action) => {
-            //     state.status = 'rejected';
-            //     state.error = action.payload;
-            // },
-            // [deleteAPI.pending]: (state) => {state.isLoading = true; state.error = null;},
-            // [deleteAPI.fulfilled]: (state) => {
-            //     state.status = 'resolved';
-            //     state.isLoading = false;
-            //     // some actions with 'action'...
-            // },
-            // [deleteAPI.rejected]: (state, action) => {
-            //     state.status = 'rejected';
-            //     state.error = action.payload;
-            // },
-        }
+                builder.addCase(deleteContact.pending, (state) => {
+                    state.isLoading = true; 
+                    state.error = null;
+                });
+                
+                builder.addCase(deleteContact.fulfilled, (state, action) => {
+                    state.isLoading = false;
+                    
+                
+                    // state.token = action.payload.token;
+                    // some actions with 'action'...
+                });
+                
+                builder.addCase(deleteContact.rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.error = action.payload;
+                });
+            },
     }
 );
 
-export const {add, deluser, changeFilter} = phonebookSlice.actions;
+export const {add, deluser, changeFilter, changeButtonActive} = phonebookSlice.actions;
 export default phonebookSlice.reducer;

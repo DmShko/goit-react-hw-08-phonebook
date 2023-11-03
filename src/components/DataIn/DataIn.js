@@ -4,17 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { addAPI } from '../../API/AddContact';
 import Notiflix from 'notiflix';
 
+import { addContact } from '../../API/addContactAPI'
+import { add } from '../../phonebookStore/phoneBookSlice'
+
+
 // add css modules
 import di from './DataIn.module.css';
 
 export const DataIn = () => {
   const [name, setName] = useState('');
-  const [phone, setNumber] = useState('');
+  const [number, setNumber] = useState('');
+ 
   // const [inputNameValid, setInputNameValid] = useState('');!!!!!!!!!!!!!!!!
   // const [inputNumberValid, setInputNumberValid] = useState('');!!!!!!!!!!!!!!!!!!
 
   const dispatch = useDispatch();
   const selector = useSelector(state => state.phonebook.items);
+  const selectorToken = useSelector(state => state.logIn.token);
+  const selectorChangeMode = useSelector(state => state.phonebook.changeMode);
 
   const clearInputs = () => {
     setName('');
@@ -28,7 +35,7 @@ export const DataIn = () => {
       evt.preventDefault();
 
       if (
-        selector.find(element => element.name === [name, phone].join(' ')) !==
+        selector.find(element => element.name === [name, number].join(' ')) !==
         undefined
       ) {
         Notiflix.Notify.warning(`"${name}" is already in contacts!`, {
@@ -37,9 +44,9 @@ export const DataIn = () => {
         });
       } else {
         // sdd user to Redux store
-        // dispatch(addAPI({ name, phone })).then(value =>
-        //   dispatch(add({ name, phone, value }))
-        // );
+        dispatch(addContact({data:{name, number}, token: selectorToken})).then(value =>
+          dispatch(add({name, number, value}))
+        );
       }
 
       // dispatch(add({name, phone,}));
@@ -99,7 +106,7 @@ export const DataIn = () => {
           <p className={di.text}>Number</p>
           <input
             className={di.input}
-            value={phone}
+            value={number}
             name="number"
             type="tel"
             onChange={inputChange}
@@ -112,7 +119,7 @@ export const DataIn = () => {
         </label>
 
         <button className={di.button} type="submit">
-          Add contact
+          {selectorChangeMode? 'Change contact': 'Add contact'}
         </button>
       </form>
     </>

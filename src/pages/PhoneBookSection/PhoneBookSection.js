@@ -27,6 +27,7 @@ export const PhoneBookSection = () => {
 
   useEffect(() => {
     dispatch(getUserAPI(selectorToken));
+    // eslint-disable-next-line
   },[dispatch])
 
   useEffect(() => {
