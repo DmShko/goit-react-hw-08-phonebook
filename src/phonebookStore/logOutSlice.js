@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// import Notiflix from 'notiflix';
-// import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 
-import { outAPI } from '../API/addUserAPI';
+
+import { outAPI } from '../API/outUserAPI';
 
 const logOutInitialState = {filter: '', isLoading: false, error: null, token: null, logOutData: null};
 
-const logInSlice = createSlice(
+const logOutSlice = createSlice(
     {
         name: 'logOut',
         initialState: logOutInitialState,
@@ -29,12 +29,25 @@ const logInSlice = createSlice(
                     state.isLoading = false;
                 
                     state.token = action.payload.token;
+
+                    console.log(action.payload.status);
+                    if(action.payload.status === 200) Notiflix.Notify.success('The user is logged out.', {position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
             
                  builder.addCase(outAPI.rejected, (state, action) => {
+
                     state.isLoading = false;
-                    state.error = action.payload;
+
+                    switch(action.state.error) {
+                        case 401:
+                            Notiflix.Notify.warning('Missing header with authorization token.', {position: 'center-top', fontSize: '24px',});
+                        break;
+                        case 500:
+                            Notiflix.Notify.warning('Server error.', {position: 'center-top', fontSize: '24px',});
+                        break;
+                        default:;
+                    };
                 });
             },
             
@@ -43,5 +56,5 @@ const logInSlice = createSlice(
 );
 
 
-export const {change} = logInSlice.actions;
-export default logInSlice.reducer;
+export const {change} = logOutSlice.actions;
+export default logOutSlice.reducer;

@@ -23,10 +23,18 @@ export const PhoneBookSection = () => {
   const selectorItems = useSelector(state => state.phonebook.items);
   const loadState = useSelector(state => state.phonebook.isLoading);
   const selectorError = useSelector(state => state.phonebook.error);
+  const selectorstatusText = useSelector(state => state.logIn.statusText);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserAPI(selectorToken));
+
+    if(selectorstatusText === 'OK') {
+      dispatch(getUserAPI(selectorToken));
+    } else {
+      Notiflix.Notify.info('You need to log in!', {position: 'center-top', fontSize: '24px',});
+    };
+
     // eslint-disable-next-line
   },[dispatch])
 

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-// import { changeFilter } from 'phonebookStore/singUpSlice';
+import { changeFilter } from 'phonebookStore/phoneBookSlice';
 
 // add css modules
 import fi from '../FindContacts/FindContacts.module.css';
@@ -12,7 +12,7 @@ export const FindContacts = () => {
   const findContact = evt => {
     
     // send value of filter to reducer function
-    // dispatch(changeFilter(evt.target.value.toLowerCase()));
+    dispatch(changeFilter(evt.target.value.toLowerCase()));
     
   };
 

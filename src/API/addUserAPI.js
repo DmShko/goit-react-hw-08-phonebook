@@ -1,17 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const URL = 'https://connections-api.herokuapp.com';
-
 export const addAPI = createAsyncThunk(
     'singUp/addUserAPI',
     async function(arg, {rejectWithValue}) {
-        
-        return await axios.post(`${URL}/users/signup`, arg).then(responce => {
-            console.log(responce);
-            return responce.data;
+        const options = {
+            method: 'POST',
+            url: 'https://connections-api.herokuapp.com/users/signup',
+            data: arg,
+        };
+    
+        return await axios.request(options).then(responce => {
+            
+            return responce.status;
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.status);
         });
            
     }

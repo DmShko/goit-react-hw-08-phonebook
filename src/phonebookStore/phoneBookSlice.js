@@ -19,14 +19,14 @@ const phonebookSlice = createSlice(
                 //find repeat contact
                 if (
                     state.items.find(
-                    element => element.name === [action.payload.name, action.payload.number].join(' ')
+                    element => element.id === action.payload.id
                     ) !== undefined
                 ) {
                     Notiflix.Notify.warning(`"${action.payload.name}" is already in contacts!`, {position: 'center-top', fontSize: '24px',});
                     return state;
                 } 
                 //add new contact with save current value state
-                state.items.push({name: [action.payload.name, action.payload.number].join(' '), id: action.payload.value.payload.id, active: state.changeMode});
+                state.items.push({name: [action.payload.name, action.payload.number].join(' '), id: action.payload.value.payload.id, active: false});
                
             },
             // delete contact
@@ -43,13 +43,25 @@ const phonebookSlice = createSlice(
             changeButtonActive(state, action) {
                 
                 state.changeMode = !state.changeMode;
-
+               
                 if(state.items.length !== 0) {
                   
-                     state.items.map(
-                     element => {return element.id === action.payload} 
-                    ).active = !state.changeMode;
+                     state.items.find(
+                     element => element.id === action.payload
+                    ).active = state.changeMode;
                 }
+            },
+
+            changeContactStore(state, action) {
+
+                console.log(action.payload.id);
+                if(state.items.length !== 0) {
+                  
+                    state.items.find(
+                    element => element.id === action.payload.id
+                   ).name = action.payload.name;
+               }
+
             },
         },
         extraReducers:
@@ -68,16 +80,17 @@ const phonebookSlice = createSlice(
                     ) {
                     action.payload.map(value => 
 
-                    { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, active: state.changeMode})});
+                    { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, active: false})});
                 }
-                // some actions with 'action'...
+              
                     // some actions with 'action'...
                 });
-                
                 builder.addCase(getUserAPI.rejected, (state, action) => {
                     state.isLoading = false;
                     state.error = action.payload;
+                    console.log(action.payload);
                 });
+
                 builder.addCase(addContact.pending, (state) => {
                     state.isLoading = true; 
                     state.error = null;
@@ -117,5 +130,5 @@ const phonebookSlice = createSlice(
     }
 );
 
-export const {add, deluser, changeFilter, changeButtonActive} = phonebookSlice.actions;
+export const {add, deluser, changeFilter, changeButtonActive, changeContactStore} = phonebookSlice.actions;
 export default phonebookSlice.reducer;

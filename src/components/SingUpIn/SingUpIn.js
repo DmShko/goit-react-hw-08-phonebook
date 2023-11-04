@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { addAPI } from '../../API/addUserAPI';
+// import { addAPI } from '../../API/addUserAPI';
 import Notiflix from 'notiflix';
 
 // add css modules
@@ -11,14 +11,16 @@ export const DataIn = () => {
   const [ nameValue, setNameValue] = useState('');
   const [ emailValue, setEmailValue] = useState('');
   const [ password, setPassword] = useState('');
-  const [NameValid, setInputNameValid] = useState(true);
+  const [nameValid, setInputNameValid] = useState(true);
   const [emailValid, setInputEmailValid] = useState(true);
   const [passwordValid, setInputPasswordValid] = useState(true);
 
   const addUser = evt => {
     
     // transfer data only, if valid fields is valid
-    if (NameValid === false && emailValid === false && passwordValid === false) {
+    if (nameValid === false && emailValid === false && passwordValid === false) {
+
+     
       evt.preventDefault();
     }
       

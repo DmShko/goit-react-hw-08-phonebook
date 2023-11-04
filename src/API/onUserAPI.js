@@ -1,18 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const URL = 'https://connections-api.herokuapp.com';
 
 export const onAPI = createAsyncThunk(
     'logIn/onUserAPI',
     async function(arg, {rejectWithValue}) {
+            const options = {
+                method: 'POST',
+                url: 'https://connections-api.herokuapp.com/users/login',
+                data: arg,
+            };
         
-        return await axios.post(`${URL}/users/login`, arg).then(responce => {
-            console.log(responce);
-            return responce.data;
+        return await axios.request(options).then(responce => {
+          
+            return {data: responce.data, status: responce.status, StTx: responce.statusText,};
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.status);
         });
            
     }
+    
 );

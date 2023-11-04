@@ -29,14 +29,14 @@ export const SingUpData = () => {
     // transfer data only, if valid fields is valid
     if (nameValid === false && emailValid === false && passwordValid === false) {
       
+     
       evt.preventDefault();
 
       dispatch(addAPI({name: nameValue, email: emailValue, password: password}));
 
     } else {
       evt.preventDefault();
-    }
-      
+    }  
 
     clearInputs();
   };
@@ -141,7 +141,7 @@ export const SingUpData = () => {
               placeholder="Enter password..."></input>
             </label>
 
-            <button>SingUp</button>
+            <button >SingUp</button>
             </div>
           
         </fieldset>

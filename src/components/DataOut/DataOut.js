@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deluser } from 'phonebookStore/phoneBookSlice';
+import { changeContact } from '../../API/changeContactAPI'
 import { changeButtonActive } from '../../phonebookStore/phoneBookSlice'
+import { changeContactStore } from '../../phonebookStore/phoneBookSlice'
 // import { deleteAPI } from '../../API/DeleteContact';
 
 // add css modules
@@ -12,12 +14,12 @@ import { deleteContact } from '../../API/delContactAPI';
 export const DataOut = ({ print }) => {
 
   const[changeItem, setChangeItem] = useState(false);
+  const[changeInputValue, setChangeInputValue] = useState('');
 
   const selector = useSelector(state => state.phonebook.filter);
   const selectorToken = useSelector(state => state.logIn.token);
   const selectorItem = useSelector(state => state.phonebook.items);
-  
-
+ 
   const dispatch = useDispatch();
 
   // chage data in App 'state' (delete user) 
@@ -30,33 +32,70 @@ export const DataOut = ({ print }) => {
     
   };
 
-  const changeContact = (evt) => {
+  const changeActive = evt => {
     
-    dispatch(changeButtonActive());
+    dispatch(changeButtonActive(evt.target.id));
    
-    if (selectorItem.map(value => { return value.id === evt.target.name}).active) {
-      evt.target.style.backgroundColor='grey'  
+    console.log(selectorItem.find(value => value.id === evt.target.id).active);
+
+    if (selectorItem.find(value => value.id === evt.target.id).active === true) {
+     
       setChangeItem(true);
+
     } else {
-      evt.target.style.backgroundColor='lightgrey';
+   
       setChangeItem(false);
+
     }
+  };
+
+  // change API contact  and in store
+  const changeCurrentContact = evt => {
+
+    // send transform store's string 'Jack Kolins 2323-23-23' to '{name: Jack Kolins, number: 2323-23-23}'
+    dispatch(changeContact({id:evt.target.name, token: selectorToken, 
+      name: changeInputValue.split('')
+      .reduce((total, amount) => {if(!'0123456789-'.includes(amount)) {total.push(amount)} return total}, []).join(''),
+        number: changeInputValue.split('')
+        .reduce((total, amount) => {if('0123456789-'.includes(amount)) {total.push(amount)} return total}, []).join('')}, 
+        )).then(response => {
+      dispatch(changeContactStore({name: changeInputValue, id: evt.target.name}));
+    });
+  };
+
+  // track new value of change contact input
+  const changeInputHandler = evt => {
+    setChangeInputValue(evt.target.value);
   };
 
   // out data in App 'state' if user name or number contain filter
   return print.name
     .toLowerCase()
     .includes(selector) ? (
-    <li className={o.item} onClick={changeContact}>
-     { changeItem ? <input defaultValue={print.name}></input> : <p> {print.name}</p>}
-      <button
-        className={o.button}
-        name={print.id}
-        type="button"
-        onClick={deleteUser}
-      >
-        Delete
-      </button>
+    <li className={changeItem ? o.itemActive : o.item} id={print.id} onClick={changeActive}>
+
+     { changeItem ? <input className={o.inputChange} autoFocus  defaultValue={print.name} onChange={changeInputHandler}></input> : <p> {print.name}</p>}
+
+      <div className={o.buttonSet}>
+        { changeItem ? <button
+          className={o.button}
+          name={print.id}
+          type="button"
+          onClick={changeCurrentContact}
+        > 
+          Change
+        </button> : ''}
+
+        <button
+          className={o.button}
+          name={print.id}
+          type="button"
+          onClick={deleteUser}
+        >
+          Delete
+        </button>
+      </div>
+     
     </li>
   ) : (
     ''

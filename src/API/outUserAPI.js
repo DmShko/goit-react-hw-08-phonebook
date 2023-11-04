@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-
 export const outAPI = createAsyncThunk(
     'logOut/outUserAPI',
     async function(arg, {rejectWithValue}) {
@@ -15,9 +14,9 @@ export const outAPI = createAsyncThunk(
       
         return await axios.request(options).then(responce => {
             
-            return responce.data;
+            return {status: responce.status, StTx: responce.statusText,};
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.status);
         });
            
     }

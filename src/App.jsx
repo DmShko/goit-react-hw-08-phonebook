@@ -1,8 +1,8 @@
 
 import { Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Notiflix from 'notiflix';
+
+// import { useDispatch } from 'react-redux';
+// import Notiflix from 'notiflix';
 
 import LogIn  from 'pages/Login/LogIn';
 import SingUp from 'pages/SingUp/SingUp';
@@ -28,7 +28,7 @@ export const App = () => {
     {path: NOTFOUND, element: <NotFound />,}
   ];
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const selector = useSelector(state => state.singUp.error);
 
   // useEffect(() => {

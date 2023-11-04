@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// import Notiflix from 'notiflix';
-// import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 
 import { addAPI } from '../API/addUserAPI';
 
-const singUpInitialState = {isLoading: false, error: null, token: null, sinUpData: {}};
+const singUpInitialState = {error: null, token: null, sinUpData: {}, status: {success: false, rejected: false}};
 
 const singUpSlice = createSlice(
     {
@@ -26,15 +25,28 @@ const singUpSlice = createSlice(
                 });
             
                 builder.addCase(addAPI.fulfilled, (state, action) => {
+
                     state.isLoading = false;
-                
                     state.token = action.payload.token;
+
+                    if(action.payload === 201) Notiflix.Notify.success('User created.', {position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
             
                  builder.addCase(addAPI.rejected, (state, action) => {
+                    
                     state.isLoading = false;
                     state.error = action.payload;
+                  
+                    switch(state.error) {
+                        case 400:
+                            Notiflix.Notify.warning('User creation error.', {position: 'center-top', fontSize: '24px',});
+                        break;
+                        case 500:
+                            Notiflix.Notify.warning('Server error.', {position: 'center-top', fontSize: '24px',});
+                        break;
+                        default:;
+                    };
                 });
             },
             

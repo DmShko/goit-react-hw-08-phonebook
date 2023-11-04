@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// import Notiflix from 'notiflix';
-// import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 
 
 import { onAPI } from '../API/onUserAPI';
 
-
-const logInInitialState = {filter: '', isLoading: false, error: null, token: null};
+const logInInitialState = {filter: '', isLoading: false, error: null, token: null, statusText:''};
 
 const logInSlice = createSlice(
     {
@@ -15,9 +13,9 @@ const logInSlice = createSlice(
         initialState: logInInitialState,
         reducers:{
             
-            change(state, action) {
+            changestatusText(state, action) {
                
-                // state.token = action.payload.token;
+                state.statusText = action.payload;
                
             },
         },
@@ -32,14 +30,23 @@ const logInSlice = createSlice(
             builder.addCase(onAPI.fulfilled, (state, action) => {
                 state.isLoading = false;
                 
-               
-                state.token = action.payload.token;
+                state.token = action.payload.data.token;
+                state.statusText = action.payload.StTx
+
+                if(action.payload.status === 200) Notiflix.Notify.success('User is logged in.', {position: 'center-top', fontSize: '24px',});
                 // some actions with 'action'...
             });
             
             builder.addCase(onAPI.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+
+                switch(state.error) {
+                    case 400:
+                        Notiflix.Notify.warning('Login error.', {position: 'center-top', fontSize: '24px',});
+                    break;
+                    default:;
+                };
             });
 
         },
@@ -47,5 +54,5 @@ const logInSlice = createSlice(
 );
 
 
-export const {change} = logInSlice.actions;
+export const {changestatusText} = logInSlice.actions;
 export default logInSlice.reducer;

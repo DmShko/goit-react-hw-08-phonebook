@@ -14,7 +14,7 @@ export const getUserAPI = createAsyncThunk(
         };
       
         return await axios.request(options).then(responce => {
-            console.log(responce);
+            
             return responce.data;
         }).catch(error =>  {
             return rejectWithValue(error.message);

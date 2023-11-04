@@ -21,7 +21,6 @@ export const DataIn = () => {
   const dispatch = useDispatch();
   const selector = useSelector(state => state.phonebook.items);
   const selectorToken = useSelector(state => state.logIn.token);
-  const selectorChangeMode = useSelector(state => state.phonebook.changeMode);
 
   const clearInputs = () => {
     setName('');
@@ -119,7 +118,7 @@ export const DataIn = () => {
         </label>
 
         <button className={di.button} type="submit">
-          {selectorChangeMode? 'Change contact': 'Add contact'}
+          Add contact
         </button>
       </form>
     </>

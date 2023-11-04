@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate  } from "react-router-dom";
 
 import { onAPI } from '../../API/onUserAPI';
 // import { Loader } from 'components/Loader/Loader';
@@ -14,7 +15,16 @@ export const LogInData = () => {
   const [emailValid, setInputEmailValid] = useState(true);
   const [passwordValid, setInputPasswordValid] = useState(true);
 
+  const selectorStatusTextLogIn = useSelector(state => state.logIn.statusText);
+
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(selectorStatusTextLogIn === 'OK') navigate("/", { replace: true });
+    // eslint-disable-next-line
+  },[selectorStatusTextLogIn])
 
   const clearInputs = () => {
    
