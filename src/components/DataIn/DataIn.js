@@ -43,8 +43,9 @@ export const DataIn = () => {
         });
       } else {
         // sdd user to Redux store
-        dispatch(addContact({data:{name, number}, token: selectorToken})).then(value =>
-          dispatch(add({name, number, value}))
+        dispatch(addContact({data:{name, number}, token: selectorToken})).then(response =>
+          {
+            dispatch(add({name, number, response}))}
         );
       }
 

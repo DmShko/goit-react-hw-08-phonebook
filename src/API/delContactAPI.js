@@ -13,11 +13,11 @@ export const deleteContact = createAsyncThunk(
             }
         };
       
-        return await axios.request(options).then(responce => {
+        return await axios.request(options).then(response => {
            
-            return responce.data;
+            return response.status;
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.status);
         });
            
     }

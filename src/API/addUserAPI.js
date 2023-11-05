@@ -10,9 +10,9 @@ export const addAPI = createAsyncThunk(
             data: arg,
         };
     
-        return await axios.request(options).then(responce => {
+        return await axios.request(options).then(response => {
             
-            return responce.status;
+            return response.status;
         }).catch(error =>  {
             return rejectWithValue(error.response.status);
         });

@@ -22,7 +22,7 @@ export const PhoneBookSection = () => {
   const selectorToken = useSelector(state => state.logIn.token);
   const selectorItems = useSelector(state => state.phonebook.items);
   const loadState = useSelector(state => state.phonebook.isLoading);
-  const selectorError = useSelector(state => state.phonebook.error);
+  // const selectorError = useSelector(state => state.phonebook.error);
   const selectorstatusText = useSelector(state => state.logIn.statusText);
   
   const dispatch = useDispatch();
@@ -37,10 +37,6 @@ export const PhoneBookSection = () => {
 
     // eslint-disable-next-line
   },[dispatch])
-
-  useEffect(() => {
-    if (selectorError !== null) Notiflix.Notify.warning(`${selectorError}`, {position: 'center-top', fontSize: '24px',});
-  },[selectorError])
 
   return (
 

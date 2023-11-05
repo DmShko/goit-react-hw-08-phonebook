@@ -11,9 +11,9 @@ export const onAPI = createAsyncThunk(
                 data: arg,
             };
         
-        return await axios.request(options).then(responce => {
+        return await axios.request(options).then(response => {
           
-            return {data: responce.data, status: responce.status, StTx: responce.statusText,};
+            return {data: response.data, status: response.status, StTx: response.statusText,};
         }).catch(error =>  {
             return rejectWithValue(error.response.status);
         });

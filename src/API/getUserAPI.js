@@ -13,11 +13,11 @@ export const getUserAPI = createAsyncThunk(
             }
         };
       
-        return await axios.request(options).then(responce => {
+        return await axios.request(options).then(response => {
             
-            return responce.data;
+            return { data: response.data, status: response.status};
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.status);
         });
            
     }

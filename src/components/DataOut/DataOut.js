@@ -36,8 +36,6 @@ export const DataOut = ({ print }) => {
     
     dispatch(changeButtonActive(evt.target.id));
    
-    console.log(selectorItem.find(value => value.id === evt.target.id).active);
-
     if (selectorItem.find(value => value.id === evt.target.id).active === true) {
      
       setChangeItem(true);
@@ -74,7 +72,7 @@ export const DataOut = ({ print }) => {
     .includes(selector) ? (
     <li className={changeItem ? o.itemActive : o.item} id={print.id} onClick={changeActive}>
 
-     { changeItem ? <input className={o.inputChange} autoFocus  defaultValue={print.name} onChange={changeInputHandler}></input> : <p> {print.name}</p>}
+     { changeItem ? <input className={o.inputChange} autoFocus  defaultValue={print.name} onChange={changeInputHandler}></input> : <p>{print.name}</p>}
 
       <div className={o.buttonSet}>
         { changeItem ? <button

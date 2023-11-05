@@ -14,11 +14,12 @@ export const changeContact = createAsyncThunk(
             }
         };
       
-        return await axios.request(options).then(responce => {
-           
-            return responce.data;
+        return await axios.request(options).then(response => {
+            
+            return response.status;
         }).catch(error =>  {
-            return rejectWithValue(error.message);
+           
+            return rejectWithValue(error.response.status);
         });
            
     }

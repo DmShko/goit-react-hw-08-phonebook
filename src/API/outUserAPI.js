@@ -12,9 +12,9 @@ export const outAPI = createAsyncThunk(
             }
         };
       
-        return await axios.request(options).then(responce => {
+        return await axios.request(options).then(response => {
             
-            return {status: responce.status, StTx: responce.statusText,};
+            return {status: response.status, StTx: response.statusText,};
         }).catch(error =>  {
             return rejectWithValue(error.response.status);
         });
