@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import home from '../Home/Home.module.css';
 
 const Home = () => {
+  
+  const selectorLogInStatus = useSelector(state => state.logIn.statusText);
 
   return (
     <div style={{display: 'flex',
@@ -15,7 +19,7 @@ const Home = () => {
                  width: '70%',
                   }}> Welcom! It's a comfortable phonebook.</h1>
 
-      <p className={home.title}>Please login or register to use</p>
+      {selectorLogInStatus === 'OK' ? <p className={home.title}>Pleasant use.</p> : <p className={home.title}>Please login or register to use.</p>}
       
     </div>
   )

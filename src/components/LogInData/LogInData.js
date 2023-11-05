@@ -102,7 +102,7 @@ export const LogInData = () => {
   };
 
   return (
-   <form onSubmit={logIn}>
+   <form className={logi.fise} onSubmit={logIn}>
         <fieldset >
           <legend >LogIn</legend>
             <div className={logi.field}>

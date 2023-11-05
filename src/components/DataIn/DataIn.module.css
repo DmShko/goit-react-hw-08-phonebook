@@ -12,19 +12,22 @@
 
     width: 90%;
     height: 30px;
-    font-size: 20px;
+    font-size: 18px;
+    text-align: center;
 
     margin: 0 10px 10px 10px;
     
+    border: none;
+    outline: none;
     border-radius: 8px;
 }
 
 input:required:invalid {
-    border: lightcoral solid 2px;
+    border-bottom: lightcoral solid 3px;
   }
 
 input:required:valid {
-    border: lightblue solid 2px;
+    border-bottom: lightblue solid 3px;
 }
 
 .button {
@@ -62,4 +65,27 @@ input:required:valid {
 
     border: 2px solid black;
     border-radius: 8px;
+}
+
+@media only screen and (min-width: 427px) and (max-width: 767px) {
+   
+
+    .form {
+        flex-direction: column;
+        margin: 0 ;
+    }
+
+    .button {
+        width: 50%;
+    }
+
+}
+
+
+@media only screen and (min-width: 678px) and (max-width: 1024px) {
+    .form {
+
+        justify-content: flex-end;
+        margin-right: 10px;
+    }
 }

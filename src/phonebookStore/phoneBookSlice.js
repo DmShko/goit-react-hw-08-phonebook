@@ -8,7 +8,7 @@ import { addContact } from '../API/addContactAPI';
 import { deleteContact } from '../API/delContactAPI';
 import { changeContact } from '../API/changeContactAPI';
 
-const phonebookInitialState = {items: [], filter: '', isLoading: false, errorChange: null, errorGet: null, errorAdd: null, errorDel: null, activeInstruction: false, changeMode: false};
+const phonebookInitialState = {items: [], filter: '', isLoading: false, errorChange: null, errorGet: null, errorAdd: null, errorDel: null, changeMode: false};
 
 const phonebookSlice = createSlice(
     {
@@ -28,7 +28,7 @@ const phonebookSlice = createSlice(
                 } 
                 
                 //add new contact with save current value state
-                state.items.push({name: [action.payload.name, action.payload.number].join(' '), id: action.payload.response.payload.id, active: false});
+                state.items.push({name: [action.payload.name, action.payload.number].join(' '), id: action.payload.response.payload.id, activeInstruction: false, active: false});
                
             },
             // delete contact
@@ -72,11 +72,13 @@ const phonebookSlice = createSlice(
              },
 
             changeActiveInstruction(state, action) {
+
                 
+                if(state.items.length !== 0) {
                  state.items.find(
                     element => element.id === action.payload.id
                    ).activeInstruction = action.payload.value;
-                console.log(action.payload.id);   
+                }
             },
         },
         extraReducers:
@@ -95,7 +97,7 @@ const phonebookSlice = createSlice(
                     ) {
                     action.payload.data.map(value => 
 
-                    { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, active: false})});
+                    { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, activeInstruction: false, active: false})});
 
                     if(action.payload.status === 200) Notiflix.Notify.success('Contacts found.', {width: '450px', position: 'center-top', fontSize: '24px',});
                 }

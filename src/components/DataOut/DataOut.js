@@ -15,12 +15,12 @@ import { deleteContact } from '../../API/delContactAPI';
 export const DataOut = ({ print }) => {
 
   const[changeItem, setChangeItem] = useState(false);
+  const[instructionKey, setInstructionKey] = useState(false);
   const[changeInputValue, setChangeInputValue] = useState('');
 
   const selector = useSelector(state => state.phonebook.filter);
   const selectorToken = useSelector(state => state.logIn.token);
   const selectorItem = useSelector(state => state.phonebook.items);
-  const selectorActiveInstruction = useSelector(state => state.phonebook.activeInstruction);
   
   const dispatch = useDispatch();
 
@@ -38,11 +38,13 @@ export const DataOut = ({ print }) => {
     
     dispatch(changeButtonActive(evt.currentTarget.id));
    
-    if (selectorItem.find(value => value.id === evt.currentTarget.id).active === true) {
+   
+    if (selectorItem.find(value => value.id === evt.currentTarget.id).active === true && evt.target.type !== 'text') {
      
       setChangeItem(true);
 
-    } else {
+    } 
+    if (selectorItem.find(value => value.id === evt.currentTarget.id).active === false && evt.target.type !== 'text'){
    
       setChangeItem(false);
 
@@ -70,11 +72,25 @@ export const DataOut = ({ print }) => {
 
   // visibility instruction, when hover contact item
   const onInstruction = (evt) => {
+
     dispatch(changeActiveInstruction({id: evt.currentTarget.id , value: true,})); 
+
+    if (selectorItem.find(value => value.id === evt.currentTarget.id).activeInstruction === false && evt.target.type !== 'button') {
+     
+      setInstructionKey(true);
+
+    } 
+   
   };
 
   const offInstruction = (evt) => {
     dispatch(changeActiveInstruction({id: evt.currentTarget.id , value: false,})); 
+    
+    if (selectorItem.find(value => value.id === evt.currentTarget.id).activeInstruction === true && evt.target.type !== 'button') {
+     
+      setInstructionKey(false);
+
+    } 
   };
 
   // out data in App 'state' if user name or number contain filter
@@ -83,8 +99,8 @@ export const DataOut = ({ print }) => {
     .includes(selector) ? (
     <li className={changeItem ? o.itemActive : o.item} id={print.id} onClick={changeActive} onMouseOut={offInstruction} onMouseOver={onInstruction}>
 
-     { changeItem ? <input className={o.inputChange} autoFocus  defaultValue={print.name} onChange={changeInputHandler}></input> : <p>{print.name}</p>}
-     { selectorActiveInstruction ? <p className={o.inst}>Click to open/close change mode.</p> : <p className={o.inst}></p>}
+     { changeItem ? <input className={o.inputChange} type={'text'} autoFocus maxLength={40} defaultValue={print.name} onChange={changeInputHandler}></input> : <p className={o.p}>{print.name}</p>}
+     { instructionKey ? <p className={o.inst}>Click to open/close change mode.</p> : <p className={o.inst}></p>}
 
       <div className={o.buttonSet}>
         { changeItem ? <button

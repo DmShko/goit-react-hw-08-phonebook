@@ -1,6 +1,7 @@
 .item {
 
     width: 95%;
+    height: 55px;
   
     display: flex;
     flex-direction: row;
@@ -17,7 +18,7 @@
 
 .itemActive {
     width: 95%;
-    height: 50px;
+    height: 55px;
   
     display: flex;
     flex-direction: row;
@@ -30,6 +31,7 @@
     margin-bottom: 5px;
     border-radius: 8px;
     background-color: orange;
+    cursor: pointer;
 }
 
 .inputChange {
@@ -38,6 +40,7 @@
     width: 250px;
 
     text-align: center;
+    border-radius: 8px;
 
     border: none;
 }
@@ -45,7 +48,6 @@
 .inputChange:focus {
     
     outline: none;
-    border-radius: 8px;
 
 }
 
@@ -89,7 +91,78 @@
     height: 20px;
     color: rgba(166, 96, 175, 0.404);
 
+    cursor: pointer;
     font-size: 20px;
     font-weight: bold;
     
+}
+
+@media only screen and (min-width: 427px) and (max-width: 767px) {
+   
+    .item {
+        width: 90%;
+        height: auto;
+      
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+   
+        padding: 10px;
+  
+    }
+
+    .itemActive {
+
+        height: auto;
+        width: 90%;
+        flex-direction: column;
+
+        justify-content: space-around;
+        align-items: center;
+      
+        padding: 10px;
+    }
+
+    .inst {
+
+        height: 20px;
+        color: rgba(166, 96, 175, 0.404);
+    
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        
+    }
+
+    .button {
+  
+       width: 100px;
+    }
+
+    .p {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+    .inst {
+
+        font-size: 12px;
+        width: 180px;
+        text-align: center;
+    }
+    
+}
+
+@media only screen and (min-width: 1024px) {
+    .inst {
+
+       
+        font-size: 20px;
+        width: 400px;
+        text-align: none;
+    }
+
 }

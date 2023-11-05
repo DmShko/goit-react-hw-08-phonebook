@@ -4,6 +4,16 @@
     margin: 0 auto;
 }
 
+@media only screen and (min-width: 1280px) {
+    .section {
+        width: 1280px;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 main {
 
     border: 1px solid grey;
@@ -49,7 +59,7 @@ main {
     justify-content: center;
     align-items: center;
 
-    width: 60px;
+    width: 65px;
     height: 30px;
 
     color: blue;
@@ -60,6 +70,14 @@ main {
 
 .link:hover {
     color: blue;
+    background-color: rgba(166, 96, 175, 0.404);
+    text-decoration: none;
+}
+
+.link:active {
+    color: blue;
+
+    border-radius: 8px;
     background-color: rgba(166, 96, 175, 0.404);
     text-decoration: none;
 }
@@ -96,5 +114,15 @@ img {
 }
 
 .clipboard:active {
+    
     box-shadow: inset 0px 0px 4px 5px #d1d1d1;
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
 }

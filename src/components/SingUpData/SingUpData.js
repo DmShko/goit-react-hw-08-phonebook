@@ -105,7 +105,7 @@ export const SingUpData = () => {
   };
 
   return (
-    <form onSubmit={addUser}>
+    <form className={sinp.fise} onSubmit={addUser}>
         <fieldset>
           <legend>SingUp</legend>
 

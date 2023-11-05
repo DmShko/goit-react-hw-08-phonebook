@@ -8,16 +8,6 @@
     margin: 0;
 }
 
-
-
-input:required:invalid {
-    border: lightcoral solid 3px;
-  }
-
-input:required:valid {
-    border: lightblue solid 3px;
-}
-
 .button {
     width: 50%;
     height: 30px;
@@ -52,6 +42,34 @@ input:required:valid {
 
     border: 2px solid black;
     border-radius: 8px;
+}
+
+@media only screen and (min-width: 427px) {
+   
+
+    form {
+        margin: 0;
+    }
+
+    .fise {
+
+        display: flex;
+        justify-content: center;
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+@media only screen and (min-width: 678px){
+    .fise {
+
+        justify-content: flex-end;
+        margin-right: 10px;
+    }
 }
 
 .field {
