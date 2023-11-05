@@ -28,7 +28,7 @@ const persistConfig = {
     // 'key' is indeficate of one or more storage
     key: 'root',
     storage,
-    // whitelist: ['logIn'],
+    // whitelist: ['persist:root.logIn', 'persist:root.phonebook'],
 }
 
 // basic reducer

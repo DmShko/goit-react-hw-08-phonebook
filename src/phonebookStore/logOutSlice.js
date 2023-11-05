@@ -30,8 +30,7 @@ const logOutSlice = createSlice(
                 
                     state.token = action.payload.token;
 
-                    console.log(action.payload.status);
-                    if(action.payload.status === 200) Notiflix.Notify.success('The user is logged out.', {position: 'center-top', fontSize: '24px',});
+                    if(action.payload.status === 200) Notiflix.Notify.success('The user is logged out.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
             
@@ -41,10 +40,10 @@ const logOutSlice = createSlice(
 
                     switch(action.state.error) {
                         case 401:
-                            Notiflix.Notify.warning('Missing header with authorization token.', {position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 500:
-                            Notiflix.Notify.warning('Server error.', {position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Server error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };

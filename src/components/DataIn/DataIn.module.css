@@ -45,6 +45,10 @@ input:required:valid {
     background-color: rgba(166, 96, 175, 0.404);
 }
 
+.button:active {
+    box-shadow: inset 0px 0px 4px 5px #d1d1d1;
+}
+
 .form {
     
     width: 95%;

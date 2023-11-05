@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import Notiflix from 'notiflix';
 // import { nanoid } from 'nanoid';
 
-import { getUserAPI } from '../API/getUserAPI';
+import { getUser } from '../API/getUserAPI';
 import { addContact } from '../API/addContactAPI';
 import { deleteContact } from '../API/delContactAPI';
 import { changeContact } from '../API/changeContactAPI';
 
-const phonebookInitialState = {items: [], filter: '', isLoading: false, errorChange: null, errorGet: null, errorAdd: null, errorDel: null, changeMode: false};
+const phonebookInitialState = {items: [], filter: '', isLoading: false, errorChange: null, errorGet: null, errorAdd: null, errorDel: null, activeInstruction: false, changeMode: false};
 
 const phonebookSlice = createSlice(
     {
@@ -23,7 +23,7 @@ const phonebookSlice = createSlice(
                     element => element.id === action.payload.id
                     ) !== undefined
                 ) {
-                    Notiflix.Notify.warning(`"${action.payload.name}" is already in contacts!`, {position: 'center-top', fontSize: '24px',});
+                    Notiflix.Notify.warning(`"${action.payload.name}" is already in contacts!`, {width: '450px', position: 'center-top', fontSize: '24px',});
                     return state;
                 } 
                 
@@ -64,16 +64,30 @@ const phonebookSlice = createSlice(
                }
 
             },
+
+            clearContact(state, action) {
+   
+                 state.items = action.payload;
+                    
+             },
+
+            changeActiveInstruction(state, action) {
+                
+                 state.items.find(
+                    element => element.id === action.payload.id
+                   ).activeInstruction = action.payload.value;
+                console.log(action.payload.id);   
+            },
         },
         extraReducers:
 
             builder => {
-                builder.addCase(getUserAPI.pending, (state) => {
+                builder.addCase(getUser.pending, (state) => {
                     state.isLoading = true; 
                     state.errorGet = null;
                 });
                 
-                builder.addCase(getUserAPI.fulfilled, (state, action) => {
+                builder.addCase(getUser.fulfilled, (state, action) => {
                     state.isLoading = false;
                 
                     if(state.items.length
@@ -83,23 +97,23 @@ const phonebookSlice = createSlice(
 
                     { return state.items.push({name: [value.name, value.number].join(' '), id: value.id, active: false})});
 
-                    if(action.payload.status === 200) Notiflix.Notify.success('Contacts found.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                    if(action.payload.status === 200) Notiflix.Notify.success('Contacts found.', {width: '450px', position: 'center-top', fontSize: '24px',});
                 }
               
                     // some actions with 'action'...
                 });
-                builder.addCase(getUserAPI.rejected, (state, action) => {
+                builder.addCase(getUser.rejected, (state, action) => {
                     state.isLoading = false;
                     state.errorGet = action.payload;
                     switch(state.errorGet) {
                         case 401:
-                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 404:
-                            Notiflix.Notify.warning('There is no such user collection.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('There is no such user collection.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 500:
-                            Notiflix.Notify.warning('Server error.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Server error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };
@@ -114,7 +128,7 @@ const phonebookSlice = createSlice(
                     state.isLoading = false;
                     
                     // state.token = action.payload.token;
-                    if(action.payload.status === 201) Notiflix.Notify.success('The contact was successfully created.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                    if(action.payload.status === 201) Notiflix.Notify.success('The contact was successfully created.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
                 
@@ -125,10 +139,10 @@ const phonebookSlice = createSlice(
                   
                     switch(state.errorAdd) {
                         case 400:
-                            Notiflix.Notify.warning('Error creating contact.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Error creating contact.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 401:
-                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };
@@ -143,7 +157,7 @@ const phonebookSlice = createSlice(
                     state.isLoading = false;
                     
                     // state.token = action.payload.token;
-                    if(action.payload === 200) Notiflix.Notify.success('The contact was successfully deleted.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                    if(action.payload === 200) Notiflix.Notify.success('The contact was successfully deleted.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
                 
@@ -152,13 +166,13 @@ const phonebookSlice = createSlice(
                     state.errorDel = action.payload;
                     switch(state.errorDel) {
                         case 401:
-                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 404:
-                            Notiflix.Notify.warning('There is no such user collection.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('There is no such user collection.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 500:
-                            Notiflix.Notify.warning('Server error.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Server error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };
@@ -173,7 +187,7 @@ const phonebookSlice = createSlice(
                     state.isLoading = false;
                     
                     // state.token = action.payload.token;
-                    if(action.payload === 200) Notiflix.Notify.success('The contact was successfully updated.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                    if(action.payload === 200) Notiflix.Notify.success('The contact was successfully updated.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
                 
@@ -182,10 +196,10 @@ const phonebookSlice = createSlice(
                     state.errorChange = action.payload;
                     switch(state.errorChange) {
                         case 400:
-                            Notiflix.Notify.warning('Contact update failed.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Contact update failed.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 401:
-                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '400px', position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };
@@ -194,5 +208,5 @@ const phonebookSlice = createSlice(
     }
 );
 
-export const {add, deluser, changeFilter, changeButtonActive, changeContactStore} = phonebookSlice.actions;
+export const {add, deluser, changeFilter, changeButtonActive, changeContactStore, clearContact, changeActiveInstruction} = phonebookSlice.actions;
 export default phonebookSlice.reducer;

@@ -29,7 +29,7 @@ const singUpSlice = createSlice(
                     state.isLoading = false;
                     state.token = action.payload.token;
 
-                    if(action.payload === 201) Notiflix.Notify.success('User created.', {position: 'center-top', fontSize: '24px',});
+                    if(action.payload === 201) Notiflix.Notify.success('User created.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
             
@@ -40,10 +40,10 @@ const singUpSlice = createSlice(
                   
                     switch(state.error) {
                         case 400:
-                            Notiflix.Notify.warning('User creation error.', {position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('User creation error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         case 500:
-                            Notiflix.Notify.warning('Server error.', {position: 'center-top', fontSize: '24px',});
+                            Notiflix.Notify.warning('Server error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;
                         default:;
                     };

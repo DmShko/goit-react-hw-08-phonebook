@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Loader } from 'components/Loader/Loader';
 import Notiflix from 'notiflix';
 
-import { getUserAPI } from '../../API/getUserAPI';
+import { getUser } from '../../API/getUserAPI';
 
 // add css modules
 import phoneSec from './PhoneBookSection.module.css';
@@ -24,19 +24,21 @@ export const PhoneBookSection = () => {
   const loadState = useSelector(state => state.phonebook.isLoading);
   // const selectorError = useSelector(state => state.phonebook.error);
   const selectorstatusText = useSelector(state => state.logIn.statusText);
+
   
   const dispatch = useDispatch();
 
   useEffect(() => {
 
     if(selectorstatusText === 'OK') {
-      dispatch(getUserAPI(selectorToken));
+     
+      dispatch(getUser(selectorToken));
     } else {
       Notiflix.Notify.info('You need to log in!', {position: 'center-top', fontSize: '24px',});
     };
 
     // eslint-disable-next-line
-  },[dispatch])
+  },[])
 
   return (
 
@@ -57,6 +59,7 @@ export const PhoneBookSection = () => {
           );
         }): ''}
        </ul>
+       
     </div>
     
   )

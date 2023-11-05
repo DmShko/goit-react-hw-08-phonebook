@@ -10,6 +10,8 @@ import { outAPI } from '../../API/outUserAPI';
 import { changestatusText } from '../../phonebookStore/logInSlice'
 import HomeIcon from '../../images/couple-with-smartphones-talking-through-video-call/5226.jpg'
 import { ReactComponent as LogOutIcon } from '../../images/logout.svg'
+import { clear } from 'phonebookStore/logInSlice'
+import { clearContact } from '../../phonebookStore/phoneBookSlice'
 
 const SharedLayout = () => {
 
@@ -25,7 +27,15 @@ const SharedLayout = () => {
     if(selectorStatusTextLogIn === 'OK') {
 
       dispatch(changestatusText(''));
-      dispatch(outAPI(selectorToken));
+      
+      // exit and clear localStorage
+      dispatch(outAPI(selectorToken)).then(response =>{
+         dispatch(clear({token:'', statusText: ''}))
+        localStorage.removeItem("persist:root") 
+        dispatch(clearContact([]))
+      });
+      
+     
       navigate("/", { replace: true });
       
     }

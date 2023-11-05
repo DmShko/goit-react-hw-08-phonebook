@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deluser } from 'phonebookStore/phoneBookSlice';
-import { changeContact } from '../../API/changeContactAPI'
-import { changeButtonActive } from '../../phonebookStore/phoneBookSlice'
-import { changeContactStore } from '../../phonebookStore/phoneBookSlice'
+import { changeContact } from '../../API/changeContactAPI';
+import { changeButtonActive } from '../../phonebookStore/phoneBookSlice';
+import { changeContactStore } from '../../phonebookStore/phoneBookSlice';
+import { changeActiveInstruction } from '../../phonebookStore/phoneBookSlice';
 // import { deleteAPI } from '../../API/DeleteContact';
 
 // add css modules
@@ -19,7 +20,8 @@ export const DataOut = ({ print }) => {
   const selector = useSelector(state => state.phonebook.filter);
   const selectorToken = useSelector(state => state.logIn.token);
   const selectorItem = useSelector(state => state.phonebook.items);
- 
+  const selectorActiveInstruction = useSelector(state => state.phonebook.activeInstruction);
+  
   const dispatch = useDispatch();
 
   // chage data in App 'state' (delete user) 
@@ -34,9 +36,9 @@ export const DataOut = ({ print }) => {
 
   const changeActive = evt => {
     
-    dispatch(changeButtonActive(evt.target.id));
+    dispatch(changeButtonActive(evt.currentTarget.id));
    
-    if (selectorItem.find(value => value.id === evt.target.id).active === true) {
+    if (selectorItem.find(value => value.id === evt.currentTarget.id).active === true) {
      
       setChangeItem(true);
 
@@ -66,13 +68,23 @@ export const DataOut = ({ print }) => {
     setChangeInputValue(evt.target.value);
   };
 
+  // visibility instruction, when hover contact item
+  const onInstruction = (evt) => {
+    dispatch(changeActiveInstruction({id: evt.currentTarget.id , value: true,})); 
+  };
+
+  const offInstruction = (evt) => {
+    dispatch(changeActiveInstruction({id: evt.currentTarget.id , value: false,})); 
+  };
+
   // out data in App 'state' if user name or number contain filter
   return print.name
     .toLowerCase()
     .includes(selector) ? (
-    <li className={changeItem ? o.itemActive : o.item} id={print.id} onClick={changeActive}>
+    <li className={changeItem ? o.itemActive : o.item} id={print.id} onClick={changeActive} onMouseOut={offInstruction} onMouseOver={onInstruction}>
 
      { changeItem ? <input className={o.inputChange} autoFocus  defaultValue={print.name} onChange={changeInputHandler}></input> : <p>{print.name}</p>}
+     { selectorActiveInstruction ? <p className={o.inst}>Click to open/close change mode.</p> : <p className={o.inst}></p>}
 
       <div className={o.buttonSet}>
         { changeItem ? <button

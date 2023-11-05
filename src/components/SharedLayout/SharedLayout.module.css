@@ -44,7 +44,23 @@ main {
 }
 
 .link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 30px;
+
     color: blue;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 500ms;
+}
+
+.link:hover {
+    color: blue;
+    background-color: rgba(166, 96, 175, 0.404);
     text-decoration: none;
 }
 
@@ -77,4 +93,8 @@ img {
 
 .clipboard:hover {
     background-color: rgba(166, 96, 175, 0.404);
+}
+
+.clipboard:active {
+    box-shadow: inset 0px 0px 4px 5px #d1d1d1;
 }

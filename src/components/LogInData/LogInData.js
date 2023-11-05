@@ -107,7 +107,7 @@ export const LogInData = () => {
           <legend >LogIn</legend>
             <div className={logi.field}>
               <label className={logi.lab}> Email
-                <input
+                <input className={logi.in}
                 type="text"
                 value={emailValue}
                 name='email'
@@ -118,7 +118,7 @@ export const LogInData = () => {
               </label>
 
             <label className={logi.lab}> Password
-              <input
+              <input className={logi.in}
               type="text"
               value={password}
               name='password'
@@ -128,7 +128,7 @@ export const LogInData = () => {
               placeholder="Enter password..."></input>
             </label>
 
-            <button>LogIn</button>
+            <button className={logi.button}>LogIn</button>
           </div>
           
         </fieldset>

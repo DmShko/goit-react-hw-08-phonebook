@@ -18,6 +18,11 @@ const logInSlice = createSlice(
                 state.statusText = action.payload;
                
             },
+            clear(state, action) {
+               
+                state.token = action.payload.token;
+                state.statusText = action.payload.statusText;
+            },
         },
         extraReducers: 
 
@@ -33,7 +38,7 @@ const logInSlice = createSlice(
                 state.token = action.payload.data.token;
                 state.statusText = action.payload.StTx
 
-                if(action.payload.status === 200) Notiflix.Notify.success('User is logged in.', {position: 'center-top', fontSize: '24px',});
+                if(action.payload.status === 200) Notiflix.Notify.success('User is logged in.', {width: '450px', position: 'center-top', fontSize: '24px',});
                 // some actions with 'action'...
             });
             
@@ -43,7 +48,7 @@ const logInSlice = createSlice(
 
                 switch(state.error) {
                     case 400:
-                        Notiflix.Notify.warning('Login error.', {position: 'center-top', fontSize: '24px',});
+                        Notiflix.Notify.warning('Login error.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     break;
                     default:;
                 };
@@ -54,5 +59,5 @@ const logInSlice = createSlice(
 );
 
 
-export const {changestatusText} = logInSlice.actions;
+export const {changestatusText, clear} = logInSlice.actions;
 export default logInSlice.reducer;

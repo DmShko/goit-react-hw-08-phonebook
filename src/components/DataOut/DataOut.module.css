@@ -72,10 +72,24 @@
     background-color: rgba(166, 96, 175, 0.404);
 }
 
+.button:active {
+    box-shadow: inset 0px 0px 4px 5px #d1d1d1;
+}
+
 .buttonSet {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     gap: 20px;
+}
+
+.inst {
+
+    height: 20px;
+    color: rgba(166, 96, 175, 0.404);
+
+    font-size: 20px;
+    font-weight: bold;
+    
 }

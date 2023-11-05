@@ -111,7 +111,7 @@ export const SingUpData = () => {
 
             <div className={sinp.field}>
               <label className={sinp.lab}> Name
-                <input className={sinp.input} type="text"
+                <input className={sinp.in} type="text"
               value={nameValue}
               name='name'
               onChange={userDataChange}
@@ -122,7 +122,7 @@ export const SingUpData = () => {
             </label>
 
             <label className={sinp.lab}> Email
-                <input className={sinp.input} type="text"
+                <input className={sinp.in} type="text"
               value={emailValue}
               name='email'
               onChange={userDataChange}
@@ -132,7 +132,7 @@ export const SingUpData = () => {
             </label>
 
             <label className={sinp.lab}> Password
-                <input className={sinp.input} type="text"
+                <input className={sinp.in} type="text"
               value={password}
               name='password'
               onChange={userDataChange}
@@ -141,7 +141,7 @@ export const SingUpData = () => {
               placeholder="Enter password..."></input>
             </label>
 
-            <button >SingUp</button>
+            <button className={sinp.button}>SingUp</button>
             </div>
           
         </fieldset>

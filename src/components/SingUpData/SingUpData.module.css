@@ -25,15 +25,20 @@ input:required:valid {
     font-size: 20px;
     border: none;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin: 10px 0 10px 0;
 
     background-color: white;
-    box-shadow: 0px 0px 22px 0 rgb(212, 212, 212), 0px 0px 12px 0.5px rgb(104, 104, 104), 0px 0px 5px 0 rgb(65, 65, 65);
+    /* box-shadow: 0px 0px 22px 0 rgb(212, 212, 212), 0px 0px 12px 0.5px rgb(104, 104, 104), 0px 0px 5px 0 rgb(65, 65, 65); */
     transition: background-color 500ms;
+    box-shadow:0px 0px 4px 5px #d1d1d1;
 }
 
 .button:hover {
     background-color: rgba(166, 96, 175, 0.404);
+}
+
+.button:active {
+    box-shadow: inset 0px 0px 4px 5px #d1d1d1;
 }
 
 .form {
@@ -60,8 +65,9 @@ input:required:valid {
 }
 
 .lab {
-    width: 250px;
-
+    width: 100%;
+    height: 30px;
+    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -69,4 +75,8 @@ input:required:valid {
     gap: 5px;
 
     margin: 0 auto 0 0;
+}
+
+.in {
+    font-size: 18px;
 }

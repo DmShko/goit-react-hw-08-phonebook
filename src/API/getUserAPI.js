@@ -2,7 +2,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-export const getUserAPI = createAsyncThunk(
+export const getUser = createAsyncThunk(
     'phonebook/GetUserAPI',
     async function(arg, {rejectWithValue}) {
         const options = {
