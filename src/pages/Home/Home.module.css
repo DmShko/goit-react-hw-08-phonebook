@@ -4,3 +4,11 @@
     padding: 5px;
     margin: 0;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 427px) {
+   
+    .title {
+       text-align: center;
+    }
+
+}
