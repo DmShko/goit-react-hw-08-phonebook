@@ -14,9 +14,9 @@
     border-radius: 8px;
 }
 
-@media only screen and (min-width: 428px) {
+@media only screen and (min-width: 320px) {
     .section {
-        max-width: 100%;
+        max-width: 85%;
         padding-left: 16px;
         padding-right: 16px;
         margin-left: auto;
@@ -36,4 +36,7 @@
     padding: 0;
 
     overflow-y: scroll;
+
+       
+    border-top: 3px solid gray;
 }

@@ -97,7 +97,55 @@
     
 }
 
-@media only screen and (min-width: 427px) and (max-width: 767px) {
+@media only screen and (min-width: 320px) and (max-width: 427px) {
+    .item {
+        width: 90%;
+        height: auto;
+      
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+   
+        padding: 10px;
+  
+    }
+
+    .itemActive {
+
+        height: auto;
+        width: 90%;
+        flex-direction: column;
+
+        justify-content: space-around;
+        align-items: center;
+      
+        padding: 10px;
+    }
+
+    .inst {
+
+        height: 20px;
+        color: rgba(166, 96, 175, 0.404);
+        margin: 20px 0 20px 0;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        
+    }
+
+    .inputChange {
+       
+        width: 200px;
+    
+    }
+
+    .button {
+  
+        width: 100px;
+     }
+}
+
+@media only screen and (min-width: 428px) and (max-width: 767px) {
    
     .item {
         width: 90%;

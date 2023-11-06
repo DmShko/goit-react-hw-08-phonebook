@@ -20,24 +20,13 @@ import { nanoid } from 'nanoid';
   const NOTFOUND = '/*';
 
 export const App = () => {
-
+  // Routes
   const appRoutes = [
     {path: REGISTER, element: <SingUp />,},
     {path: LOGIN, element: <LogIn />,},
     {path: CONTACTS, element: <PhoneBookSection />,},
     {path: NOTFOUND, element: <NotFound />,}
   ];
-
-  // const dispatch = useDispatch();
-  // const selector = useSelector(state => state.singUp.error);
-
-  // useEffect(() => {
-  //   dispatch(getAPI());
-  // },[dispatch])
-
-  // useEffect(() => {
-  //   if (selector !== null) Notiflix.Notify.warning(`${selector}`, {position: 'center-top', fontSize: '24px',});
-  // },[selector])
 
   return (
     <>

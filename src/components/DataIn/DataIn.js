@@ -94,6 +94,7 @@ export const DataIn = () => {
             value={name}
             name="name"
             type="text"
+            maxLength={16}
             onChange={inputChange}
             pattern="\w{0}[a-zA-Zа-яА-Я]+\s\w{0}[a-zA-Zа-яА-Я]+"
             title="Please, use only letters and space in the following form: ... ...!"
@@ -109,6 +110,7 @@ export const DataIn = () => {
             value={number}
             name="number"
             type="tel"
+            maxLength={11}
             onChange={inputChange}
             pattern="\d{0}[0-9]+-\d{0}[0-9]+-\d{0}[0-9]+"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +

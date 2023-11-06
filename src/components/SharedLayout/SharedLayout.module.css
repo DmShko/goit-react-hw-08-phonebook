@@ -126,3 +126,19 @@ img {
 
     gap: 10px;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .about {
+       
+        flex-direction: column;
+
+    }
+
+    .auth {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+    
+        gap: 5px;
+    }
+}

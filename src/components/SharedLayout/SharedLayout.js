@@ -82,7 +82,7 @@ const SharedLayout = () => {
           <img src={HomeIcon} alt=""></img>
           <div className={sh.about}>
             <a style={{ fontSize: '18px' }} href="https://www.freepik.com/free-vector/couple-with-smartphones-talking-through-video-call_7732599.htm#page=2&query=illustrations%20contacts&position=1&from_view=search&track=ais">Image by pch.vector</a> on Freepik
-            <p> Developed by Dmytro Shevchenko <a href="https://github.com/DmShko"> GitHub </a></p>
+            <p style={{ textAlign: 'center' }}> Developed by Dmytro Shevchenko <a href="https://github.com/DmShko"> GitHub </a></p>
           </div>
           
         </main>

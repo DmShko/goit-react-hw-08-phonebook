@@ -15,7 +15,7 @@ const Home = () => {
       <h1 style={{display: 'flex',
                  justifyContent: 'center',
                  textAlign: 'center',
-                 fontSize: '50px',
+                 fontSize: '45px',
                  width: '70%',
                   }}> Welcom! It's a comfortable phonebook.</h1>
 

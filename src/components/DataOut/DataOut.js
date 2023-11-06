@@ -34,10 +34,10 @@ export const DataOut = ({ print }) => {
     
   };
 
+  // activ/unactive change mode
   const changeActive = evt => {
     
     dispatch(changeButtonActive(evt.currentTarget.id));
-   
    
     if (selectorItem.find(value => value.id === evt.currentTarget.id).active === true && evt.target.type !== 'text') {
      
@@ -83,6 +83,7 @@ export const DataOut = ({ print }) => {
    
   };
 
+  // unvisibility instruction, when hover contact item
   const offInstruction = (evt) => {
     dispatch(changeActiveInstruction({id: evt.currentTarget.id , value: false,})); 
     
