@@ -12,6 +12,7 @@ import logInReducer from "./logInSlice";
 import phonebookReducer from "./phoneBookSlice";
 import addContactReducer from "./phoneBookSlice";
 import logOutReducer from "./logOutSlice";
+import currentUserReducer from "./currentUserSlice"
 
 const rootReducer = combineReducers(
     {
@@ -20,6 +21,7 @@ const rootReducer = combineReducers(
         logOut: logOutReducer,
         phonebook: phonebookReducer,
         addContact: addContactReducer,
+        currentUser: currentUserReducer,
         //...or more redusers
     }
 )

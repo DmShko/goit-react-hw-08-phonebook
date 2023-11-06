@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deluser } from 'phonebookStore/phoneBookSlice';
 import { changeContact } from '../../API/changeContactAPI';
@@ -21,7 +21,7 @@ export const DataOut = ({ print }) => {
   const selector = useSelector(state => state.phonebook.filter);
   const selectorToken = useSelector(state => state.logIn.token);
   const selectorItem = useSelector(state => state.phonebook.items);
-  
+
   const dispatch = useDispatch();
 
   // chage data in App 'state' (delete user) 
@@ -38,17 +38,19 @@ export const DataOut = ({ print }) => {
   const changeActive = evt => {
     
     dispatch(changeButtonActive(evt.currentTarget.id));
-   
+      
     if (selectorItem.find(value => value.id === evt.currentTarget.id).active === true && evt.target.type !== 'text') {
      
       setChangeItem(true);
 
     } 
     if (selectorItem.find(value => value.id === evt.currentTarget.id).active === false && evt.target.type !== 'text'){
-   
+      
       setChangeItem(false);
 
     }
+    
+    
   };
 
   // change API contact  and in store

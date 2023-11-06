@@ -37,8 +37,9 @@ const logOutSlice = createSlice(
                  builder.addCase(outAPI.rejected, (state, action) => {
 
                     state.isLoading = false;
+                    state.error = action.payload;
 
-                    switch(action.state.error) {
+                    switch(state.error) {
                         case 401:
                             Notiflix.Notify.warning('Missing header with authorization token.', {width: '450px', position: 'center-top', fontSize: '24px',});
                         break;

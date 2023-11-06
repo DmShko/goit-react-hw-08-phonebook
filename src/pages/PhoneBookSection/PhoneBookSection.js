@@ -12,6 +12,7 @@ import { getUser } from '../../API/getUserAPI';
 
 // add css modules
 import phoneSec from './PhoneBookSection.module.css';
+import { ReactComponent as LogUser } from '../../images/user-svgrepo-com.svg'
 
     // <DataIn> - this component performs save input data and validation.
     // here change THIS state and main state in App.
@@ -24,6 +25,9 @@ export const PhoneBookSection = () => {
   const loadState = useSelector(state => state.phonebook.isLoading);
   // const selectorError = useSelector(state => state.phonebook.error);
   const selectorstatusText = useSelector(state => state.logIn.statusText);
+  const selectorStatusTextLogIn = useSelector(state => state.logIn.statusText);
+  const visibility = useSelector(state => state.phonebook.visibility);
+  const selectorUser = useSelector(state => state.currentUser.userData);
 
   
   const dispatch = useDispatch();
@@ -43,6 +47,18 @@ export const PhoneBookSection = () => {
   return (
 
     <div className={phoneSec.section}>
+
+    { selectorStatusTextLogIn === 'OK' &&  visibility ? 
+            
+            <div className={phoneSec.userAndOut}>
+
+              <div className={phoneSec.userData}>
+                <LogUser style={{fill: 'white'}} width="30px" height="30px"/> 
+                <p style={{ fontSize: '24px', margin: 0, color: 'blue', padding: '3px'}}>{selectorUser}</p>
+              </div>
+            
+            </div>: ''} 
+
       <DataIn/>
 
       <p>Contacts</p>
