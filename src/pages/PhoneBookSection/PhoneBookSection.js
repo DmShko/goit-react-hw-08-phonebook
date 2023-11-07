@@ -61,7 +61,7 @@ export const PhoneBookSection = () => {
 
       <DataIn/>
 
-      <p>Contacts</p>
+      <p style={{fontSize: '20px'}}>Contacts</p>
       <FindContacts/>
       {loadState && <Loader/>}
       {!loadState && selectorItems.length === 0 ? <p className={phoneSec.message}>Phonebook is empty...</p>: ''}

@@ -81,6 +81,12 @@ input:required:valid {
         width: 60%;
     }
 
+    .warning {
+       
+        gap: none;
+    
+    }
+
 }
 
 
@@ -88,6 +94,18 @@ input:required:valid {
     .form {
 
         justify-content: flex-end;
-        margin-right: 10px;
+ 
     }
+}
+
+.warning {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:normal;
+
+    margin-top: 5px;
+    gap: 10px;
+
+    width: 100%;
 }

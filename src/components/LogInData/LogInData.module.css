@@ -86,6 +86,7 @@ form {
     border-radius: 8px;
     margin: 10px 0 10px 0;
 
+    cursor: pointer;
     background-color: white;
     box-shadow: 0px 0px 22px 0 rgb(212, 212, 212), 0px 0px 12px 0.5px rgb(104, 104, 104), 0px 0px 5px 0 rgb(65, 65, 65);
     transition: background-color 500ms;

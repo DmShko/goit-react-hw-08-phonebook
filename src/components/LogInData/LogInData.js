@@ -119,7 +119,7 @@ export const LogInData = () => {
 
             <label className={logi.lab}> Password
               <input className={logi.in}
-              type="text"
+              type="password"
               value={password}
               name='password'
               onChange={userDataChange}

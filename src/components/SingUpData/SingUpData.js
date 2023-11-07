@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate  } from "react-router-dom";
 
 import { addAPI } from '../../API/addUserAPI';
 
@@ -18,6 +19,8 @@ export const SingUpData = () => {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const clearInputs = () => {
     setNameValue('');
     setEmailValue('');
@@ -32,7 +35,9 @@ export const SingUpData = () => {
      
       evt.preventDefault();
 
-      dispatch(addAPI({name: nameValue, email: emailValue, password: password}));
+      dispatch(addAPI({name: nameValue, email: emailValue, password: password})).then(
+        navigate("/login", { replace: true })
+      );
 
     } else {
       evt.preventDefault();
@@ -132,7 +137,7 @@ export const SingUpData = () => {
             </label>
 
             <label className={sinp.lab}> Password
-                <input className={sinp.in} type="text"
+                <input className={sinp.in} type="password"
               value={password}
               name='password'
               onChange={userDataChange}
