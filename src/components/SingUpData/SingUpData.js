@@ -32,11 +32,12 @@ export const SingUpData = () => {
     // transfer data only, if valid fields is valid
     if (nameValid === false && emailValid === false && passwordValid === false) {
       
-     
       evt.preventDefault();
 
-      dispatch(addAPI({name: nameValue, email: emailValue, password: password})).then(
-        navigate("/login", { replace: true })
+      dispatch(addAPI({name: nameValue, email: emailValue, password: password})).then(response => { 
+         
+          if(response.payload === 201) navigate("/login", { replace: true })
+        }
       );
 
     } else {

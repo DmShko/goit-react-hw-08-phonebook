@@ -28,7 +28,7 @@ const singUpSlice = createSlice(
 
                     state.isLoading = false;
                     state.token = action.payload.token;
-
+                  
                     if(action.payload === 201) Notiflix.Notify.success('User created.', {width: '450px', position: 'center-top', fontSize: '24px',});
                     // some actions with 'action'...
                 });
