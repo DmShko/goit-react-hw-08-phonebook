@@ -245,6 +245,7 @@ const phonebookSlice = createSlice({
 
       // state.token = action.payload.token;
       if (action.payload === 200)
+
         Notiflix.Notify.success('The contact was successfully updated.', {
           width: '450px',
           position: 'center-top',

@@ -34,7 +34,7 @@ const Home = () => {
                  textAlign: 'center',
                  fontSize: '45px',
                  width: '70%',
-                  }}> Welcom! It's a comfortable phonebook.</h1>       
+                  }}> Welcome! It's a comfortable phonebook.</h1>       
 
       {selectorLogInStatus === 'OK' ? <p className={home.title}>Pleasant use.</p> : <p className={home.title}>Please login or register to use.</p>}
       
